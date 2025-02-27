@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPad 时间屏保</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        #date {
+            font-size: 8vw;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            margin-bottom: 5vh;
+        }
+        #time {
+            font-size: 20vw;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        #affirmation {
+            font-size: 4vw;
+            background: linear-gradient(90deg, #FF0000, #FF4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 5vh;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.3);
+            text-align: center;
+            line-height: 1.2;
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div id="date">2025年02月27日</div>
+    <div id="time">00:00:00</div>
+    <div id="affirmation">我天生富命，财运极佳，<br>钱喜欢我，请给我更多，我将会非常有钱</div>
+    <script>
+        const dateElement = document.getElementById('date');
+        const timeElement = document.getElementById('time');
+        const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#33FFF5', '#F5FF33'];
+
+        function updateDateTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            dateElement.textContent = `${year}年${month}月${day}日`;
+            timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+
+            // 改变时间颜色
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            timeElement.style.color = randomColor;
+        }
+
+        // 每秒更新时间
+        setInterval(updateDateTime, 1000);
+        updateDateTime(); // 立即显示时间
+    </script>
+</body>
+</html>
